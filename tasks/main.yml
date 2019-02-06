@@ -1,0 +1,17 @@
+---
+# tasks file for opensips
+
+- name: Run OpenSIPS RedHat Setup
+  import_tasks: redhat.yml
+  when: ansible_facts['os_family']|lower == 'redhat'
+
+- name: Run OpenSIPS Debian Setup
+  import_tasks: debian.yml
+  when: ansible_facts['os_family']|lower == 'debian'
+
+- name: Deploy OpenSIPS config
+  template:
+    src: '{{ opensips_config }}'
+    dest: '/etc/opensips/opensips.cfg'
+    mode: 0644
+  when: opensips_config is defined

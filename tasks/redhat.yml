@@ -1,0 +1,24 @@
+---
+# tasks for opensips installing OpenSIPS on RedHat
+
+- name: Setup OpenSIPS repository (RedHat)
+  yum:
+    name: '{{ opensips_yum_repo }}/{{ opensips_version }}/{{ opensips_build }}/el/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/opensips-yum-{{ opensips_build }}-{{ opensips_version }}-{{ opensips_yum_release }}.el{{ ansible_distribution_major_version }}.noarch.rpm'
+    state: present
+
+- name: Install OpenSIPS (Debian)
+  yum:
+    name: opensips
+    state: present
+  notify:
+    - opensips start
+    - opensips restart
+
+- name: Install OpenSIPS additional modules (Debian)
+  yum:
+    name: '{{ opensips_modules }}'
+    state: present
+  when: opensips_modules is defined and opensips_modules | length
+  notify:
+    - opensips start
+    - opensips restart

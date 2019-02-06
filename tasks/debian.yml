@@ -1,0 +1,30 @@
+---
+# tasks for opensips installing OpenSIPS on Debian
+
+- name: Setup OpenSIPS repository key from keyserver (Debian)
+  apt_key:
+    keyserver: '{{ opensips_apt_key_server }}'
+    id: '{{ opensips_apt_key_id }}'
+
+- name: Setup OpenSIPS repository (Debian)
+  apt_repository:
+    repo: 'deb {{ opensips_apt_repo }} {{ ansible_distribution_release }} {{ opensips_version }}-{{ opensips_build }}'
+    state: present
+    filename: opensips
+
+- name: Install OpenSIPS (Debian)
+  apt:
+    name: opensips
+    state: present
+  notify:
+    - opensips start
+    - opensips restart
+
+- name: Install OpenSIPS additional modules (Debian)
+  apt:
+    name: '{{ opensips_modules }}'
+    state: present
+  when: opensips_modules is defined and opensips_modules | length
+  notify:
+    - opensips start
+    - opensips restart
