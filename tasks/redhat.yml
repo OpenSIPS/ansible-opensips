@@ -3,8 +3,15 @@
 
 - name: Setup OpenSIPS repository (RedHat)
   yum:
-    name: '{{ opensips_yum_repo }}/{{ opensips_version }}/{{ opensips_build }}/el/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/opensips-yum-{{ opensips_build }}-{{ opensips_version }}-{{ opensips_yum_release }}.el{{ ansible_distribution_major_version }}.noarch.rpm'
+    name: '{{ repo | replace(" ", "") }}'
     state: present
+  vars:
+    repo: >
+      {{ opensips_yum_repo }}/{{ opensips_version }}/
+      {{ opensips_build }}/el/{{ ansible_distribution_major_version }}/
+      {{ ansible_architecture }}/opensips-yum-{{ opensips_build }}-
+      {{ opensips_version }}-{{ opensips_yum_release }}.el
+      {{ ansible_distribution_major_version }}.noarch.rpm
   register: yum_repo_install_result
   until: yum_repo_install_result is success
   retries: 10
