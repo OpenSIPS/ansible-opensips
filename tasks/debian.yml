@@ -5,6 +5,10 @@
   apt_key:
     keyserver: '{{ opensips_apt_key_server }}'
     id: '{{ opensips_apt_key_id }}'
+  register: apt_key_result
+  until: apt_key_result is success
+  retries: 10
+  delay: 2
 
 - name: Setup OpenSIPS repository (Debian)
   apt_repository:
@@ -19,6 +23,10 @@
   notify:
     - opensips start
     - opensips restart
+  register: apt_install_result
+  until: apt_install_result is success
+  retries: 10
+  delay: 2
 
 - name: Install OpenSIPS additional modules (Debian)
   apt:
@@ -28,3 +36,7 @@
   notify:
     - opensips start
     - opensips restart
+  register: apt_modules_install_result
+  until: apt_modules_install_result is success
+  retries: 10
+  delay: 2
