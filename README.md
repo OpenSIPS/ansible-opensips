@@ -5,6 +5,16 @@ This role install [OpenSIPS](http://opensips.org/) SIP Server from the
 official OpenSIPS Repositories for [Debian](http://apt.opensips.org/) and
 [RedHat](http://yum.opensips.org/).
 
+Galaxy
+------
+
+Install your role using [Ansible
+Galaxy](https://galaxy.ansible.com/razvancrainea/opensips):
+
+```
+ansible-galaxy install razvancrainea.opensips
+```
+
 
 Role Variables
 --------------
