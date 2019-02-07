@@ -16,12 +16,14 @@ installed. Default is `2.4`.
 `releases` and `nightly`. Default value is `releases`.
 * `opensips_yum_release` - indicates the release of OpenSIPS that has been
 used for RedHat packaging. Default is `3`.
-* `opensips_modules` - aditional modules that are going to be installed
+* `opensips_modules` - additional modules that are going to be installed
 besides the `opensips` package. This variable should contain packages from the
 distribution that `opensips` is installed on. For example, if you want to add
 the httpd module, you will have to add to the list `opensips-httpd` for
 RedHat-based systems, or `` for Debian-based systems. Default value is empty
 (`[]`) - no other modules are installed.
+* `opensips_config` - specify a configuration template that is going to be
+used instead of te default opensips configuration file.
 
 Example Playbook
 ----------------
