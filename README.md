@@ -29,8 +29,7 @@ used for RedHat packaging. Default is `3`.
 * `opensips_modules` - additional modules that are going to be installed
 besides the `opensips` package. This variable should contain packages from the
 distribution that `opensips` is installed on. For example, if you want to add
-the httpd module, you will have to add to the list `opensips-httpd` for
-RedHat-based systems, or `` for Debian-based systems. Default value is empty
+the httpd module, you will have to add to the list `opensips-http-modules`. Default value is empty
 (`[]`) - no other modules are installed.
 * `opensips_config` - specify a configuration template that is going to be
 used instead of te default opensips configuration file.
