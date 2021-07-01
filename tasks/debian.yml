@@ -1,6 +1,14 @@
 ---
 # tasks for opensips installing OpenSIPS on Debian
-
+- name: Setup OpenSIPS prerequisites
+  apt:
+    name: gpg
+    state: present
+  register: apt_prereq_result
+  until: apt_prereq_result is success
+  retries: 10
+  delay: 2
+  
 - name: Setup OpenSIPS repository key from keyserver (Debian)
   apt_key:
     keyserver: '{{ opensips_apt_key_server }}'
