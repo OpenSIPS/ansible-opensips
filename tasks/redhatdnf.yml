@@ -2,7 +2,7 @@
 # tasks for opensips installing OpenSIPS on RedHat
 
 - name: Setup OpenSIPS repository (RedHat)
-  yum:
+  dnf:
     name: '{{ repo | replace(" ", "") }}'
     state: present
   vars:
@@ -12,32 +12,32 @@
       {{ ansible_architecture }}/opensips-yum-{{ opensips_build }}-
       {{ opensips_version }}-{{ opensips_yum_release }}.el
       {{ ansible_distribution_major_version }}.noarch.rpm
-  register: yum_repo_install_result
-  until: yum_repo_install_result is success
+  register: dnf_repo_install_result
+  until: dnf_repo_install_result is success
   retries: 10
   delay: 2
 
 - name: Install OpenSIPS (RedHat)
-  yum:
+  dnf:
     name: opensips
     state: present
   notify:
     - opensips start
     - opensips restart
-  register: yum_install_result
-  until: yum_install_result is success
+  register: dnf_install_result
+  until: dnf_install_result is success
   retries: 10
   delay: 2
 
 - name: Install OpenSIPS additional modules (RedHat)
-  yum:
+  dnf:
     name: '{{ opensips_modules }}'
     state: present
   when: opensips_modules is defined and opensips_modules | length
   notify:
     - opensips start
     - opensips restart
-  register: yum_modules_install_result
-  until: yum_modules_install_result is success
+  register: dnf_modules_install_result
+  until: dnf_modules_install_result is success
   retries: 10
   delay: 2
