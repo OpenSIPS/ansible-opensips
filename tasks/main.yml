@@ -2,8 +2,12 @@
 # tasks file for opensips
 
 - name: Run OpenSIPS RedHat Setup
-  import_tasks: redhat.yml
-  when: ansible_facts['os_family']|lower == 'redhat'
+  import_tasks: redhatdnf.yml
+  when: ansible_facts['os_family']|lower == 'redhat' and ansible_python_version is version("3.0.0", ">=")
+
+- name: Run OpenSIPS RedHat Setup
+  import_tasks: redhatyum.yml
+  when: ansible_facts['os_family']|lower == 'redhat' and ansible_python_version is version("3.0.0", "<")
 
 - name: Run OpenSIPS Debian Setup
   import_tasks: debian.yml
