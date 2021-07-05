@@ -7,7 +7,6 @@
     state: present
   vars:
     repo: >
-    repo: >
       {{ opensips_yum_repo }}/{{ opensips_version }}/
       {{ opensips_build }}/el/{{ ansible_distribution_major_version }}/
       {{ ansible_architecture }}
