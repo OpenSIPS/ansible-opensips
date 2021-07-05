@@ -9,5 +9,4 @@ opensips_apt_key_server: 'keyserver.ubuntu.com'
 opensips_apt_repo: 'http://apt.opensips.org'
 
 # defaults for RedHat/CentOS yum
-opensips_yum_release: 3
 opensips_yum_repo: 'http://yum.opensips.org'
