@@ -7,11 +7,17 @@
     state: present
   vars:
     repo: >
+    repo: >
       {{ opensips_yum_repo }}/{{ opensips_version }}/
       {{ opensips_build }}/el/{{ ansible_distribution_major_version }}/
-      {{ ansible_architecture }}/opensips-yum-{{ opensips_build }}-
+      {{ ansible_architecture }}
+      {% if opensips_yum_release is defined %}
+      /opensips-yum-{{ opensips_build }}-
       {{ opensips_version }}-{{ opensips_yum_release }}.el
       {{ ansible_distribution_major_version }}.noarch.rpm
+      {% else %}
+      /repository.rpm
+      {% endif %}
   register: yum_repo_install_result
   until: yum_repo_install_result is success
   retries: 10
