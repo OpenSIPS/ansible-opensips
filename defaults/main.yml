@@ -1,6 +1,6 @@
 ---
 # defaults file for opensips
-opensips_version: 2.4
+opensips_version: 3.1
 opensips_build: releases # or nightly
 
 # defaults for Debian apt
