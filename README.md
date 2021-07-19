@@ -1,4 +1,4 @@
-Role Name
+OpenSIPS
 =========
 
 This role installs [OpenSIPS](http://opensips.org/) SIP Server from the
