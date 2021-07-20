@@ -1,6 +1,7 @@
 galaxy_info:
   role_name: opensips
   author: Răzvan Crainea
+  namespace: OpenSIPS
   description: OpenSIPS role to install packages from official repositories
   company: OpenSIPS Project
 
