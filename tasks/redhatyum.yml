@@ -1,6 +1,23 @@
 ---
 # tasks for opensips installing OpenSIPS on RedHat
 
+- name: Install prerequisites for RedHat
+  yum:
+          name: gpg
+          state: present
+  register: yum_prereq_result
+  until: yum_prereq_result is success
+  retries: 10
+  delay: 2
+
+- name: Setup repository key from keyserver
+  rpm_key:
+          key: "{{ opensips_rpm_key_url }}"
+  register: yum_key_result
+  until: yum_key_result is success
+  retries: 10
+  delay: 2
+  
 - name: Setup OpenSIPS repository (RedHat)
   yum:
     name: '{{ repo | replace(" ", "") }}'
