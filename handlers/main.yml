@@ -4,7 +4,7 @@
 - name: opensips start
   service:
     name: opensips
-    enabled: yes
+    enabled: true
     state: started
 
 - name: opensips restart

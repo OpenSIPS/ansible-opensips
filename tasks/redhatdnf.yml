@@ -3,8 +3,8 @@
 
 - name: Install prerequisites for RedHat
   dnf:
-          name: gpg
-          state: present
+    name: gpg
+    state: present
   register: dnf_prereq_result
   until: dnf_prereq_result is success
   retries: 10
@@ -12,12 +12,12 @@
 
 - name: Setup repository key from keyserver
   rpm_key:
-          key: "{{ opensips_rpm_key_url }}"
+    key: "{{ opensips_rpm_key_url }}"
   register: rpm_key_result
   until: rpm_key_result is success
   retries: 10
   delay: 2
-  
+
 - name: Setup OpenSIPS repository (RedHat)
   dnf:
     name: '{{ repo | replace(" ", "") }}'

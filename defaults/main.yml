@@ -1,7 +1,7 @@
 ---
 # defaults file for opensips
 opensips_version: 3.1
-opensips_build: releases # or nightly
+opensips_build: releases  # or nightly
 
 # defaults for Debian apt
 opensips_apt_key_id: '049AD65B'
