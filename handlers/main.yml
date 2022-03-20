@@ -10,4 +10,4 @@
   service:
     name: opensips
     state: restarted
-    when: run_opensips | default(True)
+  when: run_opensips | default(True)
