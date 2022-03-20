@@ -32,7 +32,7 @@ the httpd module, you will have to add to the list `opensips-http-modules`. Defa
 (`[]`) - no other modules are installed.
 * `opensips_config` - specify a configuration template that is going to be
 used instead of the default opensips configuration file.
-* `run_opensips` - specify whether OpenSIPS should be started/restarted. Default value is `yes`.
+* `opensips_start` - specify whether OpenSIPS should be started/restarted. Default value is `yes`.
 
 Example Playbook
 ----------------
