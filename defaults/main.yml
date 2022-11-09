@@ -10,4 +10,4 @@ opensips_apt_repo: 'http://apt.opensips.org'
 
 # defaults for RedHat/CentOS yum
 opensips_yum_repo: 'http://yum.opensips.org'
-opensips_rpm_key_url: 'https://yum.opensips.org/pubkey.gpg'
+opensips_rpm_key_url: 'https://yum.opensips.org/opensips-org.gpg'
