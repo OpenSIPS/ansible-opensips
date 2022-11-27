@@ -1,13 +1,13 @@
 ---
 # handlers file for opensips
 
-- name: opensips start
+- name: opensips enable
   service:
     name: opensips
     enabled: true
-    state: started
 
 - name: opensips restart
   service:
     name: opensips
     state: restarted
+  when: opensips_start | default(True)
