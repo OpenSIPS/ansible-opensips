@@ -44,7 +44,7 @@
     name: opensips
     state: present
   notify:
-    - opensips start
+    - opensips enable
     - opensips restart
   register: yum_install_result
   until: yum_install_result is success
@@ -57,7 +57,7 @@
     state: present
   when: opensips_modules is defined and opensips_modules | length
   notify:
-    - opensips start
+    - opensips enable
     - opensips restart
   register: yum_modules_install_result
   until: yum_modules_install_result is success
