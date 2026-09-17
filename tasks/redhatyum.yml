@@ -28,7 +28,7 @@
       {{ opensips_build }}/el/{{ ansible_distribution_major_version }}/
       {{ ansible_architecture }}
       {% if opensips_yum_release is defined %}
-      /opensips-yum-{{ opensips_build }}-
+      /opensips-repo-{{ opensips_build }}-
       {{ opensips_version }}-{{ opensips_yum_release }}.el
       {{ ansible_distribution_major_version }}.noarch.rpm
       {% else %}
