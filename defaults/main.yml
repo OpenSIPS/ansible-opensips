@@ -4,9 +4,9 @@ opensips_version: '4.0'
 opensips_build: releases  # or nightly
 
 # defaults for Debian apt
-opensips_apt_key_id: '049AD65B'
-opensips_apt_key_server: 'keyserver.ubuntu.com'
-opensips_apt_repo: 'http://apt.opensips.org'
+opensips_apt_repo: https://apt.opensips.org
+opensips_apt_key_url: '{{ opensips_apt_repo }}/opensips-org.gpg'
+opensips_apt_key_dest: /usr/share/keyrings/opensips-org.gpg
 
 # defaults for RedHat/CentOS yum
 opensips_yum_repo: 'http://yum.opensips.org'

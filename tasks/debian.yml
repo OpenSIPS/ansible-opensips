@@ -9,20 +9,22 @@
   retries: 10
   delay: 2
 
-- name: Setup OpenSIPS repository key from keyserver (Debian)
-  apt_key:
-    keyserver: '{{ opensips_apt_key_server }}'
-    id: '{{ opensips_apt_key_id }}'
-  register: apt_key_result
-  until: apt_key_result is success
-  retries: 10
-  delay: 2
+- name: Setup OpenSIPS key and repository (Debian)
+  block:
+    - name: Download OpenSIPS repository key
+      ansible.builtin.get_url:
+        url: '{{ opensips_apt_key_url }}'
+        dest: '{{ opensips_apt_key_dest }}'
+        mode: '0644'
 
-- name: Setup OpenSIPS repository (Debian)
-  apt_repository:
-    repo: 'deb {{ opensips_apt_repo }} {{ ansible_facts.distribution_release }} {{ opensips_version }}-{{ opensips_build }}'
-    state: present
-    filename: opensips
+    - name: Setup OpenSIPS repository
+      ansible.builtin.apt_repository:
+        repo: >-
+          deb [signed-by={{ opensips_apt_key_dest }}]
+          {{ opensips_apt_repo }}
+          {{ ansible_distribution_release }}
+          {{ opensips_version }}-releases
+        state: present
 
 - name: Install OpenSIPS (Debian)
   apt:
