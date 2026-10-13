@@ -9,22 +9,35 @@
   retries: 10
   delay: 2
 
-- name: Setup OpenSIPS key and repository (Debian)
-  block:
-    - name: Download OpenSIPS repository key
-      ansible.builtin.get_url:
-        url: '{{ opensips_apt_key_url }}'
-        dest: '{{ opensips_apt_key_dest }}'
-        mode: '0644'
+# Legacy apt-key path, gated behind opensips_use_apt_key (off by default).
+- name: Setup OpenSIPS repository key from keyserver (Debian, apt-key)
+  apt_key:
+    keyserver: '{{ opensips_apt_key_server }}'
+    id: '{{ opensips_apt_key_id }}'
+  register: apt_key_result
+  until: apt_key_result is success
+  retries: 10
+  delay: 2
+  when: opensips_use_apt_key | bool
 
-    - name: Setup OpenSIPS repository
-      ansible.builtin.apt_repository:
-        repo: >-
-          deb [signed-by={{ opensips_apt_key_dest }}]
-          {{ opensips_apt_repo }}
-          {{ ansible_distribution_release }}
-          {{ opensips_version }}-releases
-        state: present
+# New signed-by keyring approach, used by default
+- name: Download OpenSIPS repository key (Debian, keyring)
+  # apt-key was removed in Debian 13 — download the key to a keyring file
+  # and reference it via signed-by in the repo line below.
+  ansible.builtin.get_url:
+    url: '{{ opensips_apt_key_url }}'
+    dest: '{{ opensips_apt_key_dest }}'
+    mode: '0644'
+  when: not opensips_use_apt_key | bool
+
+- name: Setup OpenSIPS repository (Debian)
+  ansible.builtin.apt_repository:
+    repo: >-
+      deb {{ '' if opensips_use_apt_key | bool else '[signed-by=' ~ opensips_apt_key_dest ~ '] ' }}{{ opensips_apt_repo }}
+      {{ ansible_facts.distribution_release }}
+      {{ opensips_version }}-{{ opensips_build }}
+    state: present
+    filename: opensips
 
 - name: Install OpenSIPS (Debian)
   apt:

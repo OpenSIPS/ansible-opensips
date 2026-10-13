@@ -8,6 +8,13 @@ opensips_apt_repo: https://apt.opensips.org
 opensips_apt_key_url: '{{ opensips_apt_repo }}/opensips-org.gpg'
 opensips_apt_key_dest: /usr/share/keyrings/opensips-org.gpg
 
+# Debian only: use the legacy apt-key mechanism instead of the signed-by keyring
+# approach. apt-key was deprecated in Debian 11 and removed in Debian 13, so this
+# defaults to false; set it to true for older releases where apt-key is available.
+opensips_use_apt_key: false
+opensips_apt_key_id: '049AD65B'
+opensips_apt_key_server: 'keyserver.ubuntu.com'
+
 # defaults for RedHat/CentOS yum
 opensips_yum_repo: 'http://yum.opensips.org'
 opensips_rpm_key_url: 'https://yum.opensips.org/opensips-org.gpg'

@@ -35,6 +35,10 @@ the httpd module, you will have to add to the list `opensips-http-modules`. Defa
 * `opensips_config` - specify a configuration template that is going to be
 used instead of the default opensips configuration file.
 * `opensips_start` - specify whether OpenSIPS should be started/restarted. Default value is `yes`.
+* `opensips_use_apt_key` - Debian only: use the legacy `apt-key` mechanism
+(`opensips_apt_key_server`/`opensips_apt_key_id`) instead of a `signed-by`
+keyring. `apt-key` was removed in Debian 13; set this to `true` only for older
+releases. Default value is `false`.
 
 Example Playbook
 ----------------
