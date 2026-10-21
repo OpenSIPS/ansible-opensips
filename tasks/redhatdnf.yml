@@ -55,7 +55,7 @@
   dnf:
     name: '{{ opensips_modules }}'
     state: present
-  when: opensips_modules is defined and opensips_modules | length
+  when: opensips_modules is defined and opensips_modules | length > 0
   notify:
     - opensips enable
     - opensips restart
